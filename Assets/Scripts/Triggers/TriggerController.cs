@@ -56,6 +56,6 @@ public class TriggerController : MonoBehaviour
                 Quaternion.identity
             );
 
-        ball.Initialize(direction);
+        ball.SetDirection(direction);
     }
 }

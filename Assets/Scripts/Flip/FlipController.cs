@@ -47,7 +47,6 @@ public class FlipController : MonoBehaviour
 
         m_Asset.asset.Disable();
         m_Asset.Disable();
-        
     }
 
     private void Start()
@@ -124,8 +123,13 @@ public class FlipController : MonoBehaviour
                 1f
             );
 
-        ball
-            .MultiplyVelocity(Random.Range(1.1f, 1.3f))
-            .ReflectFromFlip(normalizedImpact);
+        BallActionBuilder.For(ball)
+            .RevertingXAxis()
+            .MultipliedBy(Random.Range(1.1f, 1.3f))
+            .ReflectFromFlip(normalizedImpact, transform.position.x)
+            .Execute();
+        // ball
+        //     .MultipliedBy(Random.Range(1.1f, 1.3f))
+        //     .ReflectFromFlip(normalizedImpact);
     }
 }
