@@ -22,7 +22,7 @@ namespace Ball
         /// Commands the ball to instantly invert its current movement on the horizontal (X) axis.
         /// </summary>
         /// <returns>The next stage of the fluent flow to apply physical modifiers.</returns>
-        IBallModifierFlow InvertingHorizontal();
+        IBallModifierFlow RevertItsHorizontal();
 
         /// <summary>
         /// Bypasses any direction changes, maintaining the ball's current movement trajectory.
@@ -138,7 +138,7 @@ namespace Ball
         }
 
         /// <inheritdoc />
-        public IBallModifierFlow InvertingHorizontal()
+        public IBallModifierFlow RevertItsHorizontal()
         {
             m_ShouldRevertX = true;
             return this;
@@ -220,13 +220,24 @@ namespace Ball
         {
             var directionX = Mathf.Sign(m_Target.transform.position.x - m_FlipperPositionX);
 
-            var angleInRadians = m_NormalizedImpact.Value * m_Target.MaxBounceAngle * Mathf.Deg2Rad;
+            try
+            {
+                var angleInRadians = m_NormalizedImpact.Value * m_Target.MaxBounceAngle * Mathf.Deg2Rad;
 
-            var outX = directionX * Mathf.Cos(angleInRadians);
-            var outY = Mathf.Sin(angleInRadians);
+                var outX = directionX * Mathf.Cos(angleInRadians);
+                var outY = Mathf.Sin(angleInRadians);
 
-            var finalDirection = new Vector2(outX, outY).normalized;
-            m_Target.SetDirection(finalDirection);
+                var finalDirection = new Vector2(outX, outY).normalized;
+                m_Target.SetDirection(finalDirection);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Debug.LogException(ex);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Error calculating flip reflection: {ex.Message}");
+            }
         }
     }
 }

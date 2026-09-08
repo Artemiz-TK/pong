@@ -112,7 +112,7 @@ namespace Network
 
             var message =
                 FormattableString.Invariant(
-                    $"FLIP: {m_MyPlayerId};{m_LocalFlip.position.x:F3};{m_LocalFlip.position.y:F3}"
+                    $"FLIP:{m_MyPlayerId};{m_LocalFlip.position.x:F3};{m_LocalFlip.position.y:F3}"
                 );
 
             Send(message);
@@ -125,7 +125,7 @@ namespace Network
 
             string message =
                 FormattableString.Invariant(
-                    $"BALL: {m_Ball.position.x:F3};{m_Ball.position.y:F3}"
+                    $"BALL:{m_Ball.position.x:F3};{m_Ball.position.y:F3}"
                 );
 
             Send(message);
@@ -171,6 +171,10 @@ namespace Network
         private void HandleMessage(
             string message)
         {
+            Debug.Log(
+                $"[CLIENT] Recebi: {message}"
+            );
+            
             if (message.StartsWith(
                     "ASSIGN:",
                     StringComparison.Ordinal))
@@ -390,6 +394,10 @@ namespace Network
             {
                 byte[] data =
                     Encoding.UTF8.GetBytes(message);
+
+                Debug.Log(
+                    $"[CLIENT] Enviando: {message}"
+                );
 
                 m_Client.Send(
                     data,

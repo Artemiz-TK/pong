@@ -124,12 +124,9 @@ public class FlipController : MonoBehaviour
             );
 
         BallActionBuilder.For(ball)
-            .InvertingHorizontal()
+            .RevertItsHorizontal()
             .MultipliedByRange(1.1f, 1.3f)
             .BounceOffFlipper(normalizedImpact, transform.position.x)
             .Execute();
-        // ball
-        //     .MultipliedBy(Random.Range(1.1f, 1.3f))
-        //     .ReflectFromFlip(normalizedImpact);
     }
 }
