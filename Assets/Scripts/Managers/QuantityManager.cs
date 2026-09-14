@@ -47,6 +47,11 @@ namespace Score
                         1
                     );
 
+                    if (m_QuantityForPlayer1 == 10)
+                    {
+                        CallbackTrigger.GameOvered(playerId);
+                    }
+
                     break;
 
                 case 2:
@@ -56,6 +61,11 @@ namespace Score
                         m_QuantityForPlayer2,
                         2
                     );
+
+                    if (m_QuantityForPlayer2 == 10)
+                    {
+                        CallbackTrigger.GameOvered(playerId);
+                    }
 
                     break;
             }

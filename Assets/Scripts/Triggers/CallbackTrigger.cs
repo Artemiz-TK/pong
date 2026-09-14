@@ -6,6 +6,7 @@ namespace Callback
     {
         public static Action<int> OnScoreChanged;
         public static Action<int, int> OnScoreAdded;
+        public static Action<int> OnGameOvered;
 
         public static void ScoreChanged(int playerId)
         {
@@ -20,6 +21,11 @@ namespace Callback
                 score,
                 playerId
             );
+        }
+
+        public static void GameOvered(int playerId)
+        {
+            OnGameOvered?.Invoke(playerId);
         }
     }
 }

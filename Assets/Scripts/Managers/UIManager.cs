@@ -14,17 +14,23 @@ namespace UI
     /// </remarks>
     public class UIManager : MonoBehaviour
     {
+        [Header("UI Player References")]
         [SerializeField] private TMP_Text m_Player1Score;
         [SerializeField] private TMP_Text m_Player2Score;
+
+        [Header("UI Victory Text")]
+        [SerializeField] private TMP_Text m_VictoryText;
 
         private void OnEnable()
         {
             CallbackTrigger.OnScoreAdded += UpdateScore;
+            CallbackTrigger.OnGameOvered += GameOver;
         }
 
         private void OnDisable()
         {
             CallbackTrigger.OnScoreAdded -= UpdateScore;
+            CallbackTrigger.OnGameOvered -= GameOver;
         }
 
         private void UpdateScore(int value, int player)
@@ -38,6 +44,12 @@ namespace UI
                     m_Player2Score.text = value.ToString();
                     break;
             }
+        }
+
+        private void GameOver(int player)
+        {
+            m_VictoryText.text = $"O jogador {player} ganhou.";
+            
         }
     }
 }

@@ -73,6 +73,7 @@ namespace Network
             m_ReceiveThread.Start();
 
             Send("HELLO");
+            Send($"{j}");
 
             Debug.Log(
                 "[CLIENT] Conectando ao servidor..."
