@@ -174,7 +174,7 @@ namespace Network
             Debug.Log(
                 $"[CLIENT] Recebi: {message}"
             );
-            
+
             if (message.StartsWith(
                     "ASSIGN:",
                     StringComparison.Ordinal))

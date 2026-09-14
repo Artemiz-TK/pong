@@ -35,26 +35,22 @@ public class TriggerController : MonoBehaviour
 
         CallbackTrigger.ScoreChanged(playerId);
 
-        Destroy(other.gameObject);
+        other.gameObject.SetActive(false);
 
         var spawnDirection =
             playerId == 1
                 ? Vector2.right
                 : Vector2.left;
 
-        await SpawnBall(spawnDirection);
+        await SpawnBall(ball, spawnDirection);
     }
 
-    private async Awaitable SpawnBall(Vector2 direction)
+    private async Awaitable SpawnBall(BallController ball, Vector2 direction)
     {
         await Awaitable.WaitForSecondsAsync(.3f);
 
-        var ball =
-            Instantiate(
-                m_BallPrefab,
-                Vector3.zero,
-                Quaternion.identity
-            );
+        ball.gameObject.SetActive(true);
+        ball.transform.position = Vector3.zero;
 
         ball.SetDirection(direction);
     }

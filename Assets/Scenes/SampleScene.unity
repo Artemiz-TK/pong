@@ -1530,7 +1530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13242dcd6e6a4a8cb3d698bb7f0feaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Network.PongUdpClient
-  m_ServerAddress: 127.0.0.1
+  m_ServerAddress: 10.56.3.246
   m_ServerPort: 5001
   m_LocalFlip: {fileID: 1211678138}
   m_RemoteFlip: {fileID: 982552193}
